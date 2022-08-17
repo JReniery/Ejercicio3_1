@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Ejercicio3_1.View"
+             x:Class="Ejercicio3_1.View.EmployeeList"
+             Title="Lista de Empleados">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView x:Name="clvEmployees" ItemsSource="{Binding EmployeeList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItemView WidthRequest="50" x:Name="swpDelete"
+                                                   Command="{Binding Path=BindingContext.DeleteCommand,Source={x:Reference clvEmployees}}"
+                                                   CommandParameter="{Binding .}">
+                                        <Image Source="delete_trash_icon.png" Margin="5,0"/>
+                                    </SwipeItemView>
+                                    <SwipeItemView WidthRequest="50" x:Name="swpUpdate"
+                                                   Command="{Binding Path=BindingContext.UpdateCommand,Source={x:Reference clvEmployees}}"
+                                                   CommandParameter="{Binding .}">
+                                        <Image Source="update.png" Margin="0,0,5,0"/>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <Frame x:Name="frmCard" CornerRadius="10" Margin="10,5" Padding="8" HorizontalOptions="Fill">
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.RowSpan="3" Source="{Binding photo}"/>
+
+                                        <Label Grid.Column="1" FontAttributes="Bold" FontSize="Subtitle" TextColor="#442C3E"
+                                           Text="{Binding name}"/>
+
+                                        <Label Grid.Column="2" FontAttributes="Bold" FontSize="Subtitle" TextColor="#442C3E"
+                                           Text="{Binding lastName}"/>
+
+                                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+                                            <Label FontSize="Body" Text="{Binding age}"/>
+                                            <Label FontSize="Body" Text="años"/>
+                                        </StackLayout>
+
+                                        <Label Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" FontSize="Body"                                              
+                                               Text="{Binding job}" />
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

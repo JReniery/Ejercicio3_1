@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:Ejercicio3_1.CustonRenderer"
+             xmlns:vm="clr-namespace:Ejercicio3_1.ViewModel"
+             x:Class="Ejercicio3_1.View.MainPage"
+             Title="Datos del Empleado">
+
+    <ContentPage.BindingContext>
+        <vm:EmployeeViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        
+        <Frame Padding="0" HasShadow="True" CornerRadius="20" Margin="30,30,30,0" xct:ShadowEffect.Color="Black">
+            <StackLayout Margin="0,0,0,20">                
+                <Label Text="{Binding ImgLink}" IsVisible="false"/>
+                <Label Text="{Binding OldId}" IsVisible="false"/>
+
+                <controls:CircleImage x:Name="imgPhoto" Source="{Binding Photo}" HorizontalOptions="Center"
+                              xct:TouchEffect.Command="{Binding UploadPhoto}" HeightRequest="150" Margin="0,10,0,0"/>
+
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding Id}" Placeholder="número de identidad*" MaxLength="15" Keyboard="Numeric" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding Name}" Placeholder="nombre*" MaxLength="50" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding LastName}" Placeholder="apellido*" MaxLength="50" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding Age}" Placeholder="edad*" MaxLength="2" Keyboard="Numeric" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding Address}" Placeholder="dirección*" MaxLength="100" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="20,5,20,0">
+                    <local:CustomEntry Text="{Binding Job}" Placeholder="puesto*" TextColor="#1e3666" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                </Frame>
+            </StackLayout>
+        </Frame>
+        <Button x:Name="btnSave" Text="Guardar" FontAttributes="Bold" FontSize="Subtitle" Margin="40,10,40,0" CornerRadius="25" 
+                BackgroundColor="#ecd484" TextColor="#3b6c4b"
+                Command="{Binding SaveEmployeeCommand}" xct:ShadowEffect.Color="Black"/>
+        
+        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+            <!--<Frame WidthRequest="230" HeightRequest="35" Padding="0" HorizontalOptions="EndAndExpand" VerticalOptions="End" Margin="0,0,-80,10"
+                   xct:ShadowEffect.Color="Black" CornerRadius="10" IsVisible="{Binding isVisibleAlert}" BackgroundColor="{Binding bColorAlert}">
+                <Label Text="{Binding textAlert}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"
+                       FontSize="Subtitle" FontAttributes="Bold"/>
+            </Frame>-->
+            <ImageButton x:Name="btnEmployeeList" Source="list.png" WidthRequest="60" HeightRequest="60" BackgroundColor="Transparent"
+                         Margin="10,0,10,10" xct:ShadowEffect.Color="Black" HorizontalOptions="EndAndExpand"
+                         Clicked="btnEmployeeList_Clicked"/>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>
